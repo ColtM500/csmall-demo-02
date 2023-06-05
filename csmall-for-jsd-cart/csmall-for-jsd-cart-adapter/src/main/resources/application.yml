@@ -1,0 +1,11 @@
+server:
+  port: 20010
+#公共配置
+mybatis:
+  configuration:
+    cache-enabled: false   # 不启用mybatis缓存
+    map-underscore-to-camel-case: true # 映射支持驼峰命名法
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 将运行的sql输出到控制台
+spring:
+  profiles:
+    active: local

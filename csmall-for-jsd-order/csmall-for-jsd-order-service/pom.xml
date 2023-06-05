@@ -3,54 +3,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>csmall-for-jsd-business</artifactId>
+        <artifactId>csmall-for-jsd-order</artifactId>
         <groupId>cn.tedu.mall</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>cn.tedu.mall</groupId>
-    <artifactId>csmall-for-jsd-business-adapter</artifactId>
+    <artifactId>csmall-for-jsd-order-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>csmall-for-jsd-business-adapter</name>
+    <name>csmall-for-jsd-order-service</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
-        <!--starter-web-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--mysql java connector-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <!--mybatis sring-boot-starter-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
-        <!--csmall-service-->
-        <dependency>
-            <groupId>cn.tedu.mall</groupId>
-            <artifactId>csmall-for-jsd-business-service</artifactId>
+            <groupId>cn.tedu.csmall.demo</groupId>
+            <artifactId>csmall-for-jsd-commons</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>cn.tedu.mall</groupId>
-            <artifactId>csmall-for-jsd-order-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
