@@ -33,7 +33,7 @@ CREATE TABLE `cart_tbl` (
 /*Data for the table `cart_tbl` */
 
 insert  into `cart_tbl`(`id`,`commodity_code`,`price`,`count`,`user_id`) values (1,'PU201',500,10,'UU100');
-insert  into `cart_tbl`(`id`,`commodity_code`,`price`,`count`,`user_id`) values (1,'PC100',500,10,'UU100');
+insert  into `cart_tbl`(`id`,`commodity_code`,`price`,`count`,`user_id`) values (2,'PC100',500,10,'UU100');
 
 /*Table structure for table `order_tbl` */
 
@@ -70,7 +70,7 @@ CREATE TABLE `stock_tbl` (
 /*Data for the table `stock_tbl` */
 
 insert  into `stock_tbl`(`id`,`commodity_code`,`count`) values (1,'PU201',1000);
-insert  into `stock_tbl`(`id`,`commodity_code`,`count`) values (1,'PC100',1000);
+insert  into `stock_tbl`(`id`,`commodity_code`,`count`) values (2,'PC100',1000);
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
