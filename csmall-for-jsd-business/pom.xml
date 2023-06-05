@@ -7,6 +7,10 @@
         <groupId>cn.tedu.csmall.demo</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <modules>
+        <module>csmall-for-jsd-business-adapter</module>
+        <module>csmall-for-jsd-business-service</module>
+    </modules>
     <packaging>pom</packaging>
     <groupId>cn.tedu.mall</groupId>
     <artifactId>csmall-for-jsd-business</artifactId>

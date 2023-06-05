@@ -9,6 +9,7 @@
         <module>csmall-for-jsd-all</module>
         <module>csmall-for-jsd-all/csmall-for-jsd-all-adapter</module>
         <module>csmall-for-jsd-all/csmall-for-jsd-all-service</module>
+        <module>csmall-for-jsd-business</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
