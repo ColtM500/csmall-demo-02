@@ -1,8 +1,8 @@
 package cn.tedu.csmall.all.adapter.controller;
 
-import cn.tedu.csmall.all.service.IStockService;
 import cn.tedu.csmall.commons.pojo.stock.dto.StockReduceCountDTO;
 import cn.tedu.csmall.commons.restful.JsonResult;
+import cn.tedu.mall.stock.service.IStockService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

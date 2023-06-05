@@ -7,6 +7,10 @@
         <groupId>cn.tedu.csmall.demo</groupId>
         <version>0.0.1-SNAPSHOT</version><!-- lookup parent from repository -->
     </parent>
+    <modules>
+        <module>csmall-for-jsd-cart-adapter</module>
+        <module>csmall-for-jsd-cart-service</module>
+    </modules>
     <groupId>cn.tedu.mall</groupId>
     <artifactId>csmall-for-jsd-cart</artifactId>
     <version>0.0.1-SNAPSHOT</version>

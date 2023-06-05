@@ -1,9 +1,9 @@
 package cn.tedu.csmall.all.adapter.service.impl;
 
 import cn.tedu.csmall.all.adapter.mapper.CartMapper;
-import cn.tedu.csmall.all.service.ICartService;
 import cn.tedu.csmall.commons.pojo.cart.dto.CartAddDTO;
 import cn.tedu.csmall.commons.pojo.cart.entity.Cart;
+import cn.tedu.mall.cart.service.ICartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

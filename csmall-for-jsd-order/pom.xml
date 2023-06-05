@@ -11,6 +11,10 @@
     <artifactId>csmall-for-jsd-order</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>csmall-for-jsd-order</name>
+    <modules>
+        <module>csmall-for-jsd-order-adapter</module>
+        <module>csmall-for-jsd-order-service</module>
+    </modules>
     <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
     <dependencies>
