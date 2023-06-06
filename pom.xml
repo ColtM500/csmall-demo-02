@@ -3,12 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--父子继承关系,父工程保证packaging类型pom-->
+    <!--聚合关系中,聚合工程保证packaging类型是pom-->
     <packaging>pom</packaging>
+    <!--严格按照文件夹的继承包含关系实现聚合-->
     <modules>
         <module>csmall-for-jsd-commons</module>
         <module>csmall-for-jsd-all</module>
-        <module>csmall-for-jsd-all/csmall-for-jsd-all-adapter</module>
-        <module>csmall-for-jsd-all/csmall-for-jsd-all-service</module>
         <module>csmall-for-jsd-business</module>
         <module>csmall-for-jsd-order</module>
         <module>csmall-for-jsd-cart</module>
