@@ -26,12 +26,12 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements IOrderService {
     @Autowired
     private OrderMapper orderMapper;
-    // 添加@DubboReference注解,表示当前业务逻辑层中要消费其他模块的服务了
+    //添加@DubboReference注解,表示当前业务逻辑层中要消费其他模块的服务了
     // 注解后声明的应该是Dubbo注册到Nacos其他模块声明的业务逻辑层接口
     // 业务逻辑层接口的实现类会在Dubbo框架下自动获取
-    @Autowired
+    @Autowired(required = false)
     private IStockService stockService;
-    @Autowired
+    @Autowired(required = false)
     private ICartService cartService;
 
     @Override
