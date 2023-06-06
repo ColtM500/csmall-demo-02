@@ -13,6 +13,11 @@
     <name>csmall-for-jsd-order-adapter</name>
     <description>Demo project for Spring Boot</description>
     <dependencies>
+        <!--Spring Cloud Starter Alibaba -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
         <!--starter-web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
