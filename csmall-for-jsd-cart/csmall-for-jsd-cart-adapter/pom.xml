@@ -14,10 +14,20 @@
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
-        <!--Spring Cloud Starter Alibaba -->
+        <!--Spring Cloud Starter Alibaba-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!--配置服务的client-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--spring版本>2.3.x 需要添加bootstrap自动starter-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
         <!--starter-web-->
         <dependency>
