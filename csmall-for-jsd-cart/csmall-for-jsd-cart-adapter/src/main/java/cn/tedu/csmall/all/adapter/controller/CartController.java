@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/base/cart")
 @Api(tags = "购物车管理模块")
 public class CartController {
+    //读取自定义属性
+    @Value("${tedu.class.name}")
+    private String className;
+    @Value("${tedu.project.name}")
+    private String projectName;
+
     // 控制层装配业务逻辑层对象
     @Autowired
     private ICartService cartService;

@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "业务触发模块")
 @Slf4j
 public class BusinessController {
+    //读取自定义属性
+    @Value("${tedu.class.name}")
+    private String className;
+    @Value("${tedu.project.name}")
+    private String projectName;
+
     @Autowired
     private IBusinessService businessService;
 

@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/base/order")
 @Api(tags = "订单管理模块")
 public class OrderController {
+    //读取自定义属性
+    @Value("${tedu.class.name}")
+    private String className;
+    @Value("${tedu.project.name}")
+    private String projectName;
+
     @Autowired
     private IOrderService orderService;
     @PostMapping("/add")

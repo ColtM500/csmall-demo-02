@@ -1,0 +1,66 @@
+spring:
+  profiles:
+    active: local
+
+#在这个文件内部配置不同环境的配置属性
+#---不能省略,每个---下都是一套不同环境配置
+---
+spring:
+  application:
+    name: csmall-for-jsd-cart
+  config:
+    activate:
+      on-profile: local
+  #nacos远程配置读取属性
+  cloud:
+    nacos:
+      config:
+        #指向nacos配置管理中心地址
+        server-addr: localhost:8848
+        #namespace的id值 public默认值 dev的id
+        namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+        #指定读取配置文件的格式
+        file-extension: yaml
+        #是否支持自动刷新,如果远程配置发生变动,本地是否自动刷新 true
+        refresh-enabled: true
+        #配置文件也要分组
+        group: 0.0.1-SNAPSHOT
+        #读取文件名称前缀，默认值spring.application.name
+        prefix: ${spring.application.name}
+        #指定读取远程某个命名空间的配置文件 redis-db.yaml 和 datasource-db.yaml
+        #配置属性的类型格式为List
+        shared-configs:
+          #一个-表示配置config中一个元素 -后跟着属性名
+          - data-id: redis-db.yaml
+            group: 0.0.1-SNAPSHOT
+            refresh: true
+          - data-id: datasource-db.yaml
+            group: 0.0.1-SNAPSHOT
+            refresh: true
+
+#多个环境的--- 用空行隔开
+
+---
+spring:
+  application:
+    name: csmall-for-jsd-cart
+  config:
+    activate:
+      on-profile: test
+  #nacos远程配置读取属性
+  cloud:
+    nacos:
+      config:
+        #指向nacos配置管理中心地址
+        server-addr: localhost:8848
+        #namespace的id值 public默认值 dev的id
+        namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+        #指定读取的配置文件的格式 默认properties后缀,json text yaml html xml...
+        file-extension: yaml
+        #是否支持自动刷新,如果远程配置发生变动,本地是否自动刷新 true
+        refresh-enabled: true
+        #配置文件也要分组
+        group: 0.0.1-SNAPSHOT
+        #读取文件名称前缀,默认值spring.application.name
+        prefix: ${spring.application.name}
+
