@@ -16,3 +16,16 @@ spring:
       discovery:
         #提供当前nacos客户端可以通信访问的服务端地址
         server-addr: localhost:8848
+        #是否当前服务实例，是临时实例true（临时实例）false（永久实例）需要扩容则用临时实例
+        ephemeral: true
+        #ip地址：当前客户端进程所在服务器的ip地址 如果默认的 就是spring boot自动读取的服务器ip
+        #ip地址
+        ip: 10.1.6.74
+        #命名空间 配置的是nacos注册中心中的命名空间id
+        namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+        #定义这个实例所属的分组，一般用版本相关的内容的值去区分
+        group: 0.0.1-SNAPSHOT
+        #心跳检测间隔时间 临时实例检测的
+        heart-beat-interval: 5
+        #超时心跳时间删除 ↑↑要比上面时间大 超过了20s的值 检测了还是不健康就把它剔除
+        ip-delete-timeout: 20
