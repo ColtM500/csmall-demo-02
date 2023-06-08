@@ -4,6 +4,7 @@ import cn.tedu.csmall.business.service.IBusinessService;
 import cn.tedu.csmall.commons.pojo.order.dto.OrderAddDTO;
 import cn.tedu.mall.order.service.IOrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class BusinessServiceImpl implements IBusinessService {
     //business作为业务入口,要调用orderService 目前无法注入
     //无法调用.
+    @DubboReference
     private IOrderService dubboOrderService;
     @Override
     public void buy() {

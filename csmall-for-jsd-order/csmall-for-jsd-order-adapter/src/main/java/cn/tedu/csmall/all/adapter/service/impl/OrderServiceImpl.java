@@ -17,11 +17,13 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // order模块是具备生产者特征的,它会被business模块调用,所以也要加@DubboService注解
+@DubboService
 @Service
 @Slf4j
 public class OrderServiceImpl implements IOrderService {
