@@ -5,10 +5,12 @@ import cn.tedu.csmall.commons.pojo.cart.dto.CartAddDTO;
 import cn.tedu.csmall.commons.pojo.cart.entity.Cart;
 import cn.tedu.mall.cart.service.ICartService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@DubboService
 @Service
 @Slf4j
 public class CartServiceImpl implements ICartService {

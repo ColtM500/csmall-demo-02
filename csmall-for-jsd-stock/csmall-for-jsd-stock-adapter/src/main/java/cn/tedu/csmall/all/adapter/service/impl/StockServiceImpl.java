@@ -6,9 +6,15 @@ import cn.tedu.csmall.commons.pojo.stock.dto.StockReduceCountDTO;
 import cn.tedu.csmall.commons.restful.ResponseCode;
 import cn.tedu.mall.stock.service.IStockService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 添加一个provider角色的dubbo注解，底层在创建bean对象时，
+ * 会包裹这个对象启动一个server服务端，接收consumer调用
+ */
+@DubboService
 @Service
 @Slf4j
 public class StockServiceImpl implements IStockService {

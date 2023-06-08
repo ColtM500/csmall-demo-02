@@ -16,6 +16,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,13 @@ public class OrderServiceImpl implements IOrderService {
     //添加@DubboReference注解,表示当前业务逻辑层中要消费其他模块的服务了
     // 注解后声明的应该是Dubbo注册到Nacos其他模块声明的业务逻辑层接口
     // 业务逻辑层接口的实现类会在Dubbo框架下自动获取
-    @Autowired(required = false)
+
+//    @Autowired(required = false)
+    @DubboReference
     private IStockService stockService;
-    @Autowired(required = false)
+
+//    @Autowired(required = false)
+    @DubboReference
     private ICartService cartService;
 
     @Override
@@ -56,11 +61,11 @@ public class OrderServiceImpl implements IOrderService {
         log.info("新增订单信息为:{}",order);
 
         // 为了实现Seata的回滚效果,在这里随机抛出异常
-        if( Math.random()<0.5){
-            // 抛出异常
-            throw new CoolSharkServiceException(
-                    ResponseCode.INTERNAL_SERVER_ERROR,"发送随机异常");
-        }
+//        if( Math.random()<0.5){
+//            // 抛出异常
+//            throw new CoolSharkServiceException(
+//                    ResponseCode.INTERNAL_SERVER_ERROR,"发送随机异常");
+//        }
     }
 
     // 分页查询所有订单的业务逻辑层方法

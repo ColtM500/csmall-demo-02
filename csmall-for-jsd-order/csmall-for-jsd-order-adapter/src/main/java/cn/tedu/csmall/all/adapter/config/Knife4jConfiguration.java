@@ -32,8 +32,8 @@ public class Knife4jConfiguration {
     @Bean
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("csmall测试案例-cart")
-            .description("csmall测试案例-cart")
+            .title("csmall测试案例-order")
+            .description("csmall测试案例-order")
             .termsOfServiceUrl("地址待定")
             .contact(new Contact("", "", ""))
             .version("1.0")
@@ -43,7 +43,7 @@ public class Knife4jConfiguration {
     public Docket createRestApi(ApiInfo apiInfo) {
         return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(apiInfo)
-            .groupName("cart")
+            .groupName("order")
             .select()
             .apis(RequestHandlerSelectors.basePackage("cn.tedu.csmall.all.adapter.controller"))
             .paths(PathSelectors.any())

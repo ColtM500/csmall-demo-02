@@ -1,10 +1,10 @@
 spring:
-#  #数据源
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/csmall_db?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-#    username: root
-#    password: root
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    #数据源
+#    datasource:
+#      url: jdbc:mysql://localhost:3306/csmall_db?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+#      username: root
+#      password: root
+#      driver-class-name: com.mysql.cj.jdbc.Driver
 
   #nacos交互的相关属性
   application:
@@ -30,3 +30,32 @@ spring:
         heart-beat-interval: 5
         #超时心跳时间删除 ↑↑要比上面时间大 超过了20s的值 检测了还是不健康就把它剔除
         ip-delete-timeout: 20
+
+dubbo:
+  application:
+    # 所有微服务中的application.name使用${}引用一下我们配置过的这个名字
+    name: ${spring.application.name}
+    #dubbo协议
+  protocol:
+    #dubbo使用nacos作为注册中心，注册的协议信息
+    #-1表示从20881端口开始，选择第一个空端口
+    port: -1
+    name: dubbo
+  #配置注册中心属性
+  registry:
+    #告诉dubbo注册中心类型和地址
+    address: nacos://localhost:8848
+    #分组 和 nacos之前分组完全一样的
+    group: 0.0.1-SNAPSHOT
+    #命名空间 dev 这个属性没有提示
+    parameters:
+      registry-type: nacos
+      namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+    #减少在nacos中dubbo提供的一些默认的配置注册信息 如果不关闭 随着dubbo
+    #客户端运行nacos配置中心列表中会出现大量重复
+    use-as-config-center: false
+    use-as-metadata-center: false
+  consumer:
+    #关闭consumer的检查功能，如果不关闭，在consumer一旦发现服务注册中心
+    #没有调用的服务，就会报错
+    check: false
