@@ -34,7 +34,7 @@ public class OrderServiceImpl implements IOrderService {
     // 业务逻辑层接口的实现类会在Dubbo框架下自动获取
 
 //    @Autowired(required = false)
-    @DubboReference
+    @DubboReference(loadbalance = "random")
     private IStockService stockService;
 
 //    @Autowired(required = false)
