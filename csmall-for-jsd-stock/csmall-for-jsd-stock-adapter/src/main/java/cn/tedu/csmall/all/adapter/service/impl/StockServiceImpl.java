@@ -8,6 +8,7 @@ import cn.tedu.mall.stock.service.IStockService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,10 +19,15 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class StockServiceImpl implements IStockService {
+    @Value("${server.port}")
+    private String port;
+
     @Autowired
     private StockMapper stockMapper;
     @Override
     public void reduceCommodityCount(StockReduceCountDTO stockReduceCountDTO) {
+        System.out.println(
+                "*********目前provider调用的实例,运行在server.port:"+port+"*********");
         int count=stockMapper.selectStockCountByCommodityCode(
                 stockReduceCountDTO.getCommodityCode());
         if (count==0){
