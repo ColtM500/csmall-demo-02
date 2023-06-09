@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // order模块是具备生产者特征的,它会被business模块调用,所以也要加@DubboService注解
-@DubboService
+@DubboService(loadbalance = "random")
 @Service
 @Slf4j
 public class OrderServiceImpl implements IOrderService {
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements IOrderService {
     // 业务逻辑层接口的实现类会在Dubbo框架下自动获取
 
 //    @Autowired(required = false)
-    @DubboReference(loadbalance = "random")
+    @DubboReference
     private IStockService stockService;
 
 //    @Autowired(required = false)

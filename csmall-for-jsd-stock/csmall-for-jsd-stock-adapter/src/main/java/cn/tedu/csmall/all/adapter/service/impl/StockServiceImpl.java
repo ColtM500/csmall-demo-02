@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * 添加一个provider角色的dubbo注解，底层在创建bean对象时，
  * 会包裹这个对象启动一个server服务端，接收consumer调用
  */
-@DubboService
+@DubboService(loadbalance = "roundrobin",weight = 1)
 @Service
 @Slf4j
 public class StockServiceImpl implements IStockService {
