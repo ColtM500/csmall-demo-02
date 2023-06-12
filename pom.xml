@@ -15,6 +15,7 @@
         <module>csmall-for-jsd-cart</module>
         <module>csmall-for-jsd-stock</module>
         <module>csmall-spring-boot-starter</module>
+        <module>csmall-for-jsd-gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
