@@ -14,9 +14,10 @@ import org.springframework.context.annotation.*;
  * 如果想要指定，需要提供扫描包路径的string[]
  * 通过注解的属性传递
  */
-@ComponentScan
-        (basePackages =
-                {"cn.tedu.csmall.starter.test.Bean"})
+
+@ComponentScan(basePackages = {
+        "cn.tedu.csmall.starter.test.Bean",
+        "cn.tedu.csmall.starter.test.config.condition"})
 
 /**
  * 读取自定义properties或者yml文件
