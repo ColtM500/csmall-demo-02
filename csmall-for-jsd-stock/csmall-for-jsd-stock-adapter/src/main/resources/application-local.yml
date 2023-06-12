@@ -59,3 +59,11 @@ dubbo:
     #关闭consumer的检查功能，如果不关闭，在consumer一旦发现服务注册中心
     #没有调用的服务，就会报错
     check: false
+
+tarena:
+  user:
+    #开启自动配置条件
+    enable: true
+    #属性注入
+    name: 王翠花
+    jwt: jwt

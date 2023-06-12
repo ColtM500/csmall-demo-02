@@ -40,7 +40,8 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>4.2.3</version>
-            <!--scope范围 provided 在编译时有效,运行时无效-->
+            <!--scope范围 provided 在编译时有效,测试有效,运行时无效(jar包范围效果)
+            使用springboot实现ConditionalOnClass/CondtionalOnMissingClass注解编码,依赖必须provided-->
             <scope>provided</scope>
         </dependency>
     </dependencies>

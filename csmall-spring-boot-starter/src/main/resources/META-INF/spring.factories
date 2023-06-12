@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.tarena.csmall.starter.config.UserUtilsAutoConfiguration
