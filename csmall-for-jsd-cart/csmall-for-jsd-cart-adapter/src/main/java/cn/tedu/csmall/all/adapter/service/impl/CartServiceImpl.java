@@ -8,18 +8,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@DubboService
+@DubboService(loadbalance = "roundrobin", weight = 1)
 @Service
 @Slf4j
 public class CartServiceImpl implements ICartService {
+    @Value("${server.port}")
+    private String port;
+
     // cart模块的业务逻辑层实现类要装配cart模块的持久层来实现业务
     @Autowired
     private CartMapper cartMapper;
 
     @Override
     public void cartAdd(CartAddDTO cartAddDTO) {
+        System.out.println(
+                "*********目前provider调用的实例,运行在server.port:"+port+"*********");
         // 业务逻辑层方法的参数是CartAddDTO,但是操作数据库进行新增购物车的方法参数是Cart
         // 所以我们要将参数CartAddDTO类型对象中的属性赋值转换为Cart类型对象
         // 实例化Cart类型对象
@@ -34,6 +40,8 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public void deleteUserCart(String userId, String commodityCode) {
+        System.out.println(
+                "*********目前provider调用的实例,运行在server.port:"+port+"*********");
         // 删除购物车中商品的方法直接调用即可
         cartMapper.deleteCartByUserIdAndCommodityCode(userId,commodityCode);
         // 日志输出

@@ -1,0 +1,7 @@
+# 启动端口
+server:
+  port: 8888
+# 开启profile
+spring:
+  profiles:
+    active: local

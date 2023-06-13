@@ -1,0 +1,52 @@
+spring:
+  main:
+    #解决spring cloud gateway和spring mvc冲突问题
+    web-application-type: reactive
+  application:
+    #网关作为微服务框架中的一个应用程序,也要有应用名称
+    #即使不在nacos
+    name: csmall-for-jsd-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+    #路由转发配置
+#          routes:
+#            #只要在一个网关中路由配置数据 id保持唯一
+#            - id: demo02-stock-loadbalance
+#              #想要负载均衡访问后端服务,不能制定具体ip地址和端口,配置服务名称
+#             #          uri: lb://csmall-for-jsd-cart
+#              uri: lb://csmall-for-jsd-cart
+#              # 断言,assert,实现判断的目的,判断进入gateway的请求是否符合断言的匹配
+#              predicates:
+#                - Path=/**
+#                - Host=localhost:8888
+
+#            #只要在一个网关中路由配置数据 id保持唯一
+#            - id: demo02-stock-loadbalance
+#              #想要负载均衡访问后端服务,不能制定具体ip地址和端口,配置服务名称
+#              uri: lb://csmall-for-jsd-stock
+#              # 断言,assert,实现判断的目的,判断进入gateway的请求是否符合断言的匹配
+#              predicates:
+#                - Path=/**
+#                - Host=localhost:8888
+
+    #添加nacos注册中心相关属性
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        #ip地址
+        ip: 127.0.0.1
+        #定义命名空间,选择不同环境 dev,配置命名空间id
+        namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+        #定义这个实例所属的分组,一般用版本相关内容的值去区分
+        group: 0.0.1-SNAPSHOT
+        #心跳检测间隔时间
+        heart-beat-interval: 5
+        #超时心跳时间删除
+        ip-delete-timeout: 15
+        #选择是否在nacos进行注册
+        register-enabled: true
+

@@ -8,7 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 //开启Dubbo配置注解
 @EnableDubbo
 @SpringBootApplication
-@ComponentScan(basePackages = {"cn.tedu.csmall.all","cn.tedu.csmall.commons.exception"})
+@ComponentScan(basePackages =
+        {"cn.tedu.csmall.all",
+                "cn.tedu.csmall.commons.exception",
+        })
 public class StockApplication {
     public static void main(String[] args) {
         SpringApplication.run(StockApplication.class, args);
