@@ -1,5 +1,6 @@
 package cn.tedu.csmall.gateway.filters;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -43,8 +44,14 @@ public class MyFilter03 implements GlobalFilter, Ordered {
             jsonResult.setState(-999);
             jsonResult.setMessage("您当前未认证");
             jsonResult.setData(null);
-            String jsonData ="{\"status\":-999,\"message\":\"您当前未认证\",\"data\":null}";
+            String jsonData = JSON.toJSONString(jsonResult);
+//            String jsonData ="{\"status\":-999,\"message\":\"您当前未认证\",\"data\":null}";
             response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+
+            //Mono.fromSupplier() 函数创建了一个异步处理单元，它会在需要时执行其参数中的操作并返回一个Mono对象
+            //Mono对象被传递 以触发响应输出流的写入操作
+            //在Mono的回调函数中wrap() 方法将一段字符串转换成字节数组，并将其包装为DataBuffer对象
+            //由wrap() 方法返回的DataBuffer对象会被写入到HTTP响应输出流中，完成响应的构建
             return response.writeWith(Mono.fromSupplier(()->{
                 return response.bufferFactory().wrap(jsonData.getBytes(StandardCharsets.UTF_8));
             }));
