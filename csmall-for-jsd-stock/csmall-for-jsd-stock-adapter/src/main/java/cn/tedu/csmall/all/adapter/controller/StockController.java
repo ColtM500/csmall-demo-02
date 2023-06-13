@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/base/stock")
 @Api(tags = "库存管理模块")
@@ -31,7 +33,7 @@ public class StockController {
     @GetMapping("/reduce/count")
     @ApiOperation("减少指定商品的库存数")
     public JsonResult reduceCommodityCount(
-            StockReduceCountDTO stockReduceCountDTO){
+            StockReduceCountDTO stockReduceCountDTO, HttpServletResponse response){
         //为了starter检测userUtils
         System.out.println(userUtils);
         // 调用业务逻辑层方法
