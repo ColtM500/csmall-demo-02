@@ -16,6 +16,8 @@
         <module>csmall-for-jsd-stock</module>
         <module>csmall-spring-boot-starter</module>
         <module>csmall-for-jsd-gateway</module>
+        <module>csmall-filter-interceptor</module>
+        <module>csmall-for-jsd-sentinel-study</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,9 +25,11 @@
         <version>2.5.9</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>cn.tedu.csmall.demo</groupId>
     <artifactId>csmall-for-jsd</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <description>微服务测试案例父级工程</description>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
