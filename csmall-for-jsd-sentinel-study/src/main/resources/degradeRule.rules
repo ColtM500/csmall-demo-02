@@ -1,0 +1,11 @@
+[
+    {
+        "resource": "sayHi",
+        "count": 1,
+        "grade": 0,
+        "timeWindow": 10,
+        "slowRatioThreshold": 0.5,
+        "minRequestAmount": 1,
+        "statIntervalMs": 10000
+    }
+]

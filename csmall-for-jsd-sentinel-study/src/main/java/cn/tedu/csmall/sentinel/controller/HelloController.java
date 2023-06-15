@@ -2,14 +2,13 @@ package cn.tedu.csmall.sentinel.controller;
 
 import cn.tedu.csmall.sentinel.block.GlobalExceptionHandler;
 import cn.tedu.csmall.sentinel.service.HelloService;
-import com.alibaba.csp.sentinel.Entry;
-import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 @Slf4j
 @RestController
@@ -24,14 +23,13 @@ public class HelloController {
      * String result
      */
     @GetMapping("/hello")
-    //定义代码片段为资源
+    //定义代码片段为资源 限流的远程资源
     @SentinelResource(
             value="sayHi",
             blockHandler = "sayHiBlockHandle",
             blockHandlerClass = GlobalExceptionHandler.class
     )
-
-    public String sayHi(String name){
+    public String sayHi(String name) throws IOException {
         //准备资源入口
 //        Entry entry = null;
         String sayHelloWords = null;
