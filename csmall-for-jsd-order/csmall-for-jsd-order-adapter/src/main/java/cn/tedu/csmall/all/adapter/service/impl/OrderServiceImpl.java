@@ -12,6 +12,7 @@ import cn.tedu.csmall.commons.restful.ResponseCode;
 import cn.tedu.mall.cart.service.ICartService;
 import cn.tedu.mall.order.service.IOrderService;
 import cn.tedu.mall.stock.service.IStockService;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import java.util.List;
@@ -43,24 +44,20 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public void orderAdd(OrderAddDTO orderAddDTO) {
-        // 1.先减去订单中商品的库存数(调用Stock模块减少库存的方法)
-        // 库存减少方法需要参数类型是StockReduceCountDTO,我们需要先实例化它
+        // stock
         StockReduceCountDTO countDTO=new StockReduceCountDTO();
         countDTO.setCommodityCode(orderAddDTO.getCommodityCode());
         countDTO.setReduceCount(orderAddDTO.getCount());
         // 利用Dubbo调用stock模块减少库存的业务逻辑层方法实现功能
         stockService.reduceCommodityCount(countDTO);
 
-        // 2.从购物车中删除用户选中的商品(调用Cart模块删除购物车中商品的方法)
-        // 利用dubbo调用cart模块删除购物车中商品的方法实现功能
-        cartService.deleteUserCart(orderAddDTO.getUserId(),
-                                    orderAddDTO.getCommodityCode());
-        // 3.新增当前订单信息
+        //local order insert
         Order order=new Order();
         BeanUtils.copyProperties(orderAddDTO,order);
         // 下面执行新增
         orderMapper.insertOrder(order);
         log.info("新增订单信息为:{}",order);
+        rpcCartDelete(orderAddDTO.getUserId(), orderAddDTO.getCommodityCode());
 
         // 为了实现Seata的回滚效果,在这里随机抛出异常
 //        if( Math.random()<0.5){
@@ -68,6 +65,17 @@ public class OrderServiceImpl implements IOrderService {
 //            throw new CoolSharkServiceException(
 //                    ResponseCode.INTERNAL_SERVER_ERROR,"发送随机异常");
 //        }
+    }
+
+    public void cartDeleteFallback(String userId, String commodityCode, Throwable e){
+        log.error("购物车对user:{},商品:{} 删除失败", userId,commodityCode,e);
+    }
+
+    //购物车删除 远程调用
+    @SentinelResource(value = "cartDelete", fallback = "cartDeleteFallback")
+    public void rpcCartDelete(String userId, String commodityCode){
+        //delete Cart
+        cartService.deleteUserCart(userId, commodityCode);
     }
 
     // 分页查询所有订单的业务逻辑层方法

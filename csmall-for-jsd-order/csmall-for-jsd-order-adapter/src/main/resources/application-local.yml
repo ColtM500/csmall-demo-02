@@ -21,6 +21,28 @@ spring:
         namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
         group: 0.0.1-SNAPSHOT
         heart-beat-interval: 5
+        ip-delete-timeout: 15
+
+    sentinel:
+      datasource:
+        nacos-degrade-datasource:
+          nacos:
+            #nacos配置地址
+            server-addr: localhost:8848
+            #namespace从哪个命名空间 启动nacos获取命名空间id
+            namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+            #分组
+            group-id: 0.0.1-SNAPSHOT
+            #读取远程文件名称 熔断文件
+            data-id: degrade.rules
+            #规则有很多中 限流,熔断,有系统保护规则 指定当前flow.rules里配置的规则种类
+            rule-type: degrade
+            #读取文件的数据类型 json
+            data-type: json
+            #需要指定在nacos数据源中
+            username: nacos
+            password: nacos
+
 
 dubbo:
   application:
