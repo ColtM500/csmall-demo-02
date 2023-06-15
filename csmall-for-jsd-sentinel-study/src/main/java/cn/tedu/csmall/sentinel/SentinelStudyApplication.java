@@ -1,6 +1,7 @@
 package cn.tedu.csmall.sentinel;
 
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,8 @@ public class SentinelStudyApplication {
         SpringApplication.run(SentinelStudyApplication.class, args);
 //        //编写 当前sentinel中唯一资源sayHi的流控规则/熔断规则
 //        //针对资源的规则，一个程序可以有多个规则对象，流控规则FlowRule
+//          List<DegradeRule> degradeRules = new ArrayList<>();
+          //添加一个熔断规则
 //        List<FlowRule> rules = new ArrayList<>();
 //        //定义一个具体的流控规则 放到list中
 //        FlowRule flowRule = new FlowRule();

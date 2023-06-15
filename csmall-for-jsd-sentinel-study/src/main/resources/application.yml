@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    sentinel:
+      #指定当前程序要读取的配置文件来源file 本地nacos redis
+      #datasource:
+      datasource:
+        nacosDatasource:
+          nacos:
+            #nacos的配置地址
+            server-addr: localhost:8848
+            #namespace 从哪个命名空间
+            namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+            #分组
+            group: 0.0.1-SNAPSHOT
+            #读取远程文件
+            data-id: flow.rules
+            #规则很多种 限流、熔断、系统保护 指定当前flow.rules里配置的规则种类
+            rule-type: flow
+            #读取文件的数据类型 json
+            data-type: json
+            #需要指定
+            username: nacos
+            password: nacos
+
+

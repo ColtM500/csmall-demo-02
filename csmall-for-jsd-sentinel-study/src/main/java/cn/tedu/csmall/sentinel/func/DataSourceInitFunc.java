@@ -45,7 +45,7 @@ public class DataSourceInitFunc implements InitFunc {
                 );
         //将FlowRule对象列表注册到Sentinel的流控规则管理器中
         //通过调用FlowRuleManager.register2Property()方法把对象列表转化为规则属性并注册
-        FlowRuleManager.register2Property(flowDataSource.getProperty());
+//        FlowRuleManager.register2Property(flowDataSource.getProperty());
         //sentinel提供了文件SPI/API
         //SPI(Service Provider Interface)和API(Application Programming Interface)读取方式
     }
