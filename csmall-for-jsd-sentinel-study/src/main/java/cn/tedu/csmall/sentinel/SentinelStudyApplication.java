@@ -2,6 +2,7 @@ package cn.tedu.csmall.sentinel;
 
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import org.springframework.boot.SpringApplication;
@@ -20,8 +21,20 @@ public class SentinelStudyApplication {
         SpringApplication.run(SentinelStudyApplication.class, args);
 //        //编写 当前sentinel中唯一资源sayHi的流控规则/熔断规则
 //        //针对资源的规则，一个程序可以有多个规则对象，流控规则FlowRule
-//          List<DegradeRule> degradeRules = new ArrayList<>();
-          //添加一个熔断规则
+        List<DegradeRule> degradeRules = new ArrayList<>();
+        //添加一个熔断规则
+        DegradeRule degradeRule = new DegradeRule();
+        //规则对应限制的资源id
+        degradeRule.setResource("sayHi");
+        degradeRule.setCount(1);
+        degradeRule.setGrade(RuleConstant.DEGRADE_GRADE_RT);
+        degradeRule.setTimeWindow(10);//如果出现了熔断 持续多次时间重试
+        degradeRule.setSlowRatioThreshold(0.5);
+        degradeRule.setMinRequestAmount(1);
+        degradeRule.setStatIntervalMs(10000);//统计的时间范围
+        degradeRules.add(degradeRule);
+        DegradeRuleManager.loadRules(degradeRules);
+
 //        List<FlowRule> rules = new ArrayList<>();
 //        //定义一个具体的流控规则 放到list中
 //        FlowRule flowRule = new FlowRule();

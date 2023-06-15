@@ -35,6 +35,11 @@ public class HelloController {
         //准备资源入口
 //        Entry entry = null;
         String sayHelloWords = null;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         sayHelloWords = helloService.doSayHi(name);
 //        try {
 //            //开启资源保护的入口 entry赋值
