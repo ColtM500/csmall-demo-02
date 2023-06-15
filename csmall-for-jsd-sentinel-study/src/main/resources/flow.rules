@@ -1,0 +1,8 @@
+[
+    {
+        "resource":"sayHi",
+        "count": 1,
+        "grade": 1,
+        "strategy": 0
+    }
+]
