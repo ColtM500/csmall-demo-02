@@ -42,6 +42,9 @@ public class OrderServiceImpl implements IOrderService {
     @DubboReference
     private ICartService cartService;
 
+    @Autowired
+    private RpcCartService rpcCartService;
+
     @Override
     public void orderAdd(OrderAddDTO orderAddDTO) {
         // stock
@@ -57,7 +60,8 @@ public class OrderServiceImpl implements IOrderService {
         // 下面执行新增
         orderMapper.insertOrder(order);
         log.info("新增订单信息为:{}",order);
-        rpcCartDelete(orderAddDTO.getUserId(), orderAddDTO.getCommodityCode());
+        // delete cart
+        rpcCartService.deleteUserCart(orderAddDTO);
 
         // 为了实现Seata的回滚效果,在这里随机抛出异常
 //        if( Math.random()<0.5){
@@ -67,16 +71,6 @@ public class OrderServiceImpl implements IOrderService {
 //        }
     }
 
-    public void cartDeleteFallback(String userId, String commodityCode, Throwable e){
-        log.error("购物车对user:{},商品:{} 删除失败", userId,commodityCode,e);
-    }
-
-    //购物车删除 远程调用
-    @SentinelResource(value = "cartDelete", fallback = "cartDeleteFallback")
-    public void rpcCartDelete(String userId, String commodityCode){
-        //delete Cart
-        cartService.deleteUserCart(userId, commodityCode);
-    }
 
     // 分页查询所有订单的业务逻辑层方法
     // page是页码,pageSize是每页条数
