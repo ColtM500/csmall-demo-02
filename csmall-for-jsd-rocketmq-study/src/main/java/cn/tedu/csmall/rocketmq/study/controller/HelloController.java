@@ -27,6 +27,7 @@ public class HelloController {
         //同步调用helloService
         //同步调用的方法出错 当前sayHi也得处理错误 同步成功 当前可以处理成功
         //发送消息 测试
+        //pay Load = 底层客户端body headers = 底层客户端properties
         Message<String> message = MessageBuilder.withPayload(msg).build();
         rocketMQTemplate.send("rocket-test-topic", message);//没有指明主题
         return "SUCCESS";

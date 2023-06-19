@@ -9,3 +9,6 @@ rocketmq:
     group: my-producer-group
   consumer:
     group: my-consumer-group
+logging:
+  level:
+    cn.tedu.csmall: debug
