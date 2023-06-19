@@ -5,11 +5,13 @@ import cn.tedu.mall.cart.service.ICartService;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Slf4j
+@Service
 public class RpcCartService {
 
-    @Autowired
+    @Autowired(required = false)
     private ICartService cartService;
 
     public void cartDeleteFallback(OrderAddDTO orderAddDTO, Throwable e){

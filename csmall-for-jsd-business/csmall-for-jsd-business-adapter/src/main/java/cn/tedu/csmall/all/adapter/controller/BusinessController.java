@@ -7,8 +7,11 @@ import cn.tedu.csmall.commons.restful.ResponseCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +39,10 @@ public class BusinessController {
             log.error("购买失败,原因:购买注入的OrderService实现未空");
             throw new CoolSharkServiceException(ResponseCode.BAD_REQUEST,"OrderService为空!");
         }
+
+//        Message<String> message = MessageBuilder.withPayload(msg).build();
+//        rocketMQTemplate.syncSend("rocket-test-topic",message);
+
         return JsonResult.ok("购买完成!");
     }
 

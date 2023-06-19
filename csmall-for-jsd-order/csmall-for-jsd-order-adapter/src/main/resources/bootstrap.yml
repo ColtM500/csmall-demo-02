@@ -43,7 +43,7 @@ spring:
 ---
 spring:
   application:
-    name: csmall-for-jsd-order
+    name: csmall-for-jsd-cart
   config:
     activate:
       on-profile: test

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * 完成消息接收和消费
  * 1.consumer必须是spring容器bean对象
  * 2.实现接口RocketMQListener<T> T的含义就是要处理 转化的消息
- * 2.1 T类型可以是2种常见 String 直接接收body MessageExt 消息接收的整体对象
+ * 2.1 T类型可以是2种常见 String 直接接收body ; MessageExt 消息接收的整体对象
  * 3.
  */
 @Component

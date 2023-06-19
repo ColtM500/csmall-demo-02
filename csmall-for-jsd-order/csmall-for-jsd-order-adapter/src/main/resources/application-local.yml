@@ -1,11 +1,4 @@
 spring:
-  #    #数据源
-  #    datasource:
-  #      url: jdbc:mysql://localhost:3306/csmall_db?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-  #      username: root
-  #      password: root
-  #      driver-class-name: com.mysql.cj.jdbc.Driver
-
   #nacos交互的相关属性
   application:
     #应用名称,spring框架里搭建微服务的时候,称为服务名称
@@ -73,7 +66,7 @@ dubbo:
     #没有调用的服务,就会报错
     check: false
       #配置当前order作为消费者,全局的负载均衡策略
-      loadbalance: roundrobin
+    loadbalance: roundrobin
       #/roundrobin/leastactive
   provider:
     loadbalance: random
