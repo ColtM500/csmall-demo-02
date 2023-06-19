@@ -1,0 +1,11 @@
+server:
+  port: 8880
+#rocketmq相关属性
+rocketmq:
+  #连接nameserver
+  name-server: localhost:9876
+  #默认的生产者和消费者分组 其中消费者组可以在使用注解监听队列时修改
+  producer:
+    group: my-producer-group
+  consumer:
+    group: my-consumer-group

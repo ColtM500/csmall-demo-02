@@ -18,6 +18,7 @@
         <module>csmall-for-jsd-gateway</module>
         <module>csmall-filter-interceptor</module>
         <module>csmall-for-jsd-sentinel-study</module>
+        <module>csmall-for-jsd-rocketmq-study</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
