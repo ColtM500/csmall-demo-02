@@ -15,12 +15,17 @@ import cn.tedu.mall.stock.service.IStockService;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import java.util.List;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 // order模块是具备生产者特征的,它会被business模块调用,所以也要加@DubboService注解
@@ -35,33 +40,43 @@ public class OrderServiceImpl implements IOrderService {
     // 业务逻辑层接口的实现类会在Dubbo框架下自动获取
 
 //    @Autowired(required = false)
-    @DubboReference
-    private IStockService stockService;
+//    @DubboReference
+//    private IStockService stockService;
 
 //    @Autowired(required = false)
-    @DubboReference
-    private ICartService cartService;
+//    @DubboReference
+//    private ICartService cartService;
+
+//    @Autowired
+//    private RpcCartService rpcCartService;
 
     @Autowired
-    private RpcCartService rpcCartService;
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public void orderAdd(OrderAddDTO orderAddDTO) {
-        // stock
-        StockReduceCountDTO countDTO=new StockReduceCountDTO();
-        countDTO.setCommodityCode(orderAddDTO.getCommodityCode());
-        countDTO.setReduceCount(orderAddDTO.getCount());
-        // 利用Dubbo调用stock模块减少库存的业务逻辑层方法实现功能
-        stockService.reduceCommodityCount(countDTO);
+        //发送业务处理的半事务消息
+        //消息内容userId+":"+commodityCode
+        Message message = MessageBuilder
+                .withPayload(orderAddDTO.getUserId() + ":" + orderAddDTO.getCommodityCode())
+                .build();
+        rocketMQTemplate.sendMessageInTransaction("order-add-topic", message, orderAddDTO);
 
-        //local order insert
-        Order order=new Order();
-        BeanUtils.copyProperties(orderAddDTO,order);
-        // 下面执行新增
-        orderMapper.insertOrder(order);
-        log.info("新增订单信息为:{}",order);
-        // delete cart
-        rpcCartService.deleteUserCart(orderAddDTO);
+//        // stock
+//        StockReduceCountDTO countDTO = new StockReduceCountDTO();
+//        countDTO.setCommodityCode(orderAddDTO.getCommodityCode());
+//        countDTO.setReduceCount(orderAddDTO.getCount());
+//        // 利用Dubbo调用stock模块减少库存的业务逻辑层方法实现功能
+//        stockService.reduceCommodityCount(countDTO);
+//
+//        //local order insert
+//        Order order = new Order();
+//        BeanUtils.copyProperties(orderAddDTO, order);
+//        // 下面执行新增
+//        orderMapper.insertOrder(order);
+//        log.info("新增订单信息为:{}", order);
+//        // delete cart
+//        rpcCartService.deleteUserCart(orderAddDTO);
 
         // 为了实现Seata的回滚效果,在这里随机抛出异常
 //        if( Math.random()<0.5){
@@ -74,12 +89,12 @@ public class OrderServiceImpl implements IOrderService {
 
     // 分页查询所有订单的业务逻辑层方法
     // page是页码,pageSize是每页条数
-    public JsonPage<Order> getAllOrdersByPage(Integer page, Integer pageSize){
+    public JsonPage<Order> getAllOrdersByPage(Integer page, Integer pageSize) {
         // PageHelper框架实现分页的核心操作:
         // 在要执行分页的查询运行之前,设置分页的条件
         // 设置的方式如下(固定的格式,PageHelper框架设计的)
         // PageHelper设置page为1就是查询第一页
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         // 下面开始持久层方法的调用
         // 此方法运行时因为上面设置了分页条件,sql语句中会自动出现limit关键字
         List<Order> list = orderMapper.findAllOrders();
@@ -90,7 +105,6 @@ public class OrderServiceImpl implements IOrderService {
         // 这些信息会在PageInfo对象实例化时自动计算,并赋值到PageInfo对象中
         return JsonPage.restPage(new PageInfo<>(list));
     }
-
 
 
 }

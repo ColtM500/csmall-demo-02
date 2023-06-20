@@ -1,6 +1,85 @@
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/csmall_db?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  #nacos交互的相关属性
+  application:
+    #应用名称,spring框架里搭建微服务的时候,称为服务名称
+    #只要是同一个功能的系统,都是同一个服务名称
+    name: csmall-for-jsd-order
+  #配置nacos相关的属性
+  cloud:
+    nacos:
+      discovery:
+        #提供当前nacos客户端可以通信访问的服务端地址
+        server-addr: localhost:8848
+        ip: 10.1.6.75
+        namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+        group: 0.0.1-SNAPSHOT
+        heart-beat-interval: 5
+        ip-delete-timeout: 15
+
+    sentinel:
+      datasource:
+        nacos-degrade-datasource:
+          nacos:
+            #nacos配置地址
+            server-addr: localhost:8848
+            #namespace从哪个命名空间 启动nacos获取命名空间id
+            namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+            #分组
+            group-id: 0.0.1-SNAPSHOT
+            #读取远程文件名称 熔断文件
+            data-id: degrade.rules
+            #规则有很多中 限流,熔断,有系统保护规则 指定当前flow.rules里配置的规则种类
+            rule-type: degrade
+            #读取文件的数据类型 json
+            data-type: json
+            #需要指定在nacos数据源中
+            username: nacos
+            password: nacos
+
+dubbo:
+  application:
+    #所有微服务中application.name 使用${}引用一下我们配置过的这个名字
+    name: ${spring.application.name}
+  #dubbo协议
+  protocol:
+    #dubbo使用nacos作为注册中心 注册的协议信息
+    #-1表示从20880端口开始,选择第一个空端口
+    port: -1
+    name: dubbo
+  #配置注册中心属性
+  registry:
+    #告诉dubbo注册中心类型和地址
+    address: nacos://localhost:8848
+    #分组 和nacos之前分组完全一样的.
+    group: 0.0.1-SNAPSHOT
+    #命名空间 dev 这个属性没有提示
+    parameters:
+      registry-type: nacos
+      namespace: 0ca3e672-a485-4819-b51b-c067f58aef67
+    #关闭在nacos中dubbo提供的一些默认的配置注册信息,如果不关闭,随着dubbo
+    #客户端运行nacos配置中心列表中会出现大量重复
+    use-as-config-center: false
+    use-as-metadata-center: false
+  consumer:
+    #关闭consumer的检查功能,如果不关闭,在consumer一旦发现服务注册中心
+    #没有调用的服务,就会报错
+    check: false
+    #配置当前order作为消费者,全局的负载均衡策略
+    loadbalance: roundrobin
+    #/roundrobin/leastactive
+  provider:
+    loadbalance: random
+    weight: 1
+    #明确指定要远程获取的远程服务 csmall-for-jsd-stock csmall-for-jsd-cart
+  cloud:
+    subscribed-services: csmall-for-jsd-stock,csmall-for-jsd-cart
+
+#rocketmq相关属性
+rocketmq:
+  #连接nameserver
+  name-server: 192.168.137.150:9876
+  #默认的生产者和消费者分组 其中消费者组可以在使用注解监听队列时修改
+  producer:
+    group: order-producer-group
+  consumer:
+    group: my-consumer-group

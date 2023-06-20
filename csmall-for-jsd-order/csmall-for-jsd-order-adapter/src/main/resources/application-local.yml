@@ -36,7 +36,6 @@ spring:
             username: nacos
             password: nacos
 
-
 dubbo:
   application:
     #所有微服务中application.name 使用${}引用一下我们配置过的这个名字
@@ -65,9 +64,22 @@ dubbo:
     #关闭consumer的检查功能,如果不关闭,在consumer一旦发现服务注册中心
     #没有调用的服务,就会报错
     check: false
-      #配置当前order作为消费者,全局的负载均衡策略
+    #配置当前order作为消费者,全局的负载均衡策略
     loadbalance: roundrobin
-      #/roundrobin/leastactive
+    #/roundrobin/leastactive
   provider:
     loadbalance: random
     weight: 1
+    #明确指定要远程获取的远程服务 csmall-for-jsd-stock csmall-for-jsd-cart
+  cloud:
+    subscribed-services: csmall-for-jsd-stock,csmall-for-jsd-cart
+
+#rocketmq相关属性
+rocketmq:
+  #连接nameserver
+  name-server: localhost:9876
+  #默认的生产者和消费者分组 其中消费者组可以在使用注解监听队列时修改
+  producer:
+    group: order-producer-group
+  consumer:
+    group: my-consumer-group
