@@ -50,3 +50,17 @@ dubbo:
     #关闭consumer的检查功能,如果不关闭,在consumer一旦发现服务注册中心
     #没有调用的服务,就会报错
     check: false
+  cloud:
+    #如果当前项目没有远程调用任何资源 可以给订阅服务信息配置空
+    #避免浪费性能抓取没有调用的数据
+    subscribed-services:
+
+#rocketmq相关属性
+rocketmq:
+  #连接nameserver
+  name-server: 192.168.137.150:9876
+  #默认的生产者和消费者分组 其中消费者组可以在使用注解监听队列时修改
+  producer:
+    group: order-producer-group
+  consumer:
+    group: my-consumer-group

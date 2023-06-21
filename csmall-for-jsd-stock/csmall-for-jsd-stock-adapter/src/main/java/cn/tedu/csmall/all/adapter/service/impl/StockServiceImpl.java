@@ -45,4 +45,10 @@ public class StockServiceImpl implements IStockService {
         log.info("库存减少完成!");
 
     }
+
+    @Override
+    public void returnStock(String commodityCode, Integer count) {
+        //直接调用mapper处理还库存逻辑
+        stockMapper.incrStockCount(commodityCode, count);
+    }
 }

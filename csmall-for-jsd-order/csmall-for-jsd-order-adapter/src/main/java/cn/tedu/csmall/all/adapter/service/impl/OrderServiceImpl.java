@@ -58,9 +58,11 @@ public class OrderServiceImpl implements IOrderService {
         //发送业务处理的半事务消息
         //消息内容userId+":"+commodityCode
         Message message = MessageBuilder
-                .withPayload(orderAddDTO.getUserId() + ":" + orderAddDTO.getCommodityCode())
+                .withPayload(orderAddDTO.getUserId() + ":"
+                        + orderAddDTO.getCommodityCode() + ":"
+                        + orderAddDTO.getCount())
                 .build();
-        rocketMQTemplate.sendMessageInTransaction("order-add-topic", message, orderAddDTO);
+        rocketMQTemplate.sendMessageInTransaction("order-add-topic:orderAddTag", message, orderAddDTO);
 
 //        // stock
 //        StockReduceCountDTO countDTO = new StockReduceCountDTO();

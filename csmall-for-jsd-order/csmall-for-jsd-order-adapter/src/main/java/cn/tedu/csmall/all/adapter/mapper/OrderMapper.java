@@ -1,8 +1,11 @@
 package cn.tedu.csmall.all.adapter.mapper;
 
 import cn.tedu.csmall.commons.pojo.order.entity.Order;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +24,10 @@ public interface OrderMapper {
     @Select("select id,user_id,commodity_code,count,money from order_tbl")
     List<Order> findAllOrders();
 
-
-
+    @Select("select * from order_tbl " +
+            "where user_id=#{userId} and commodity_code=#{commodityCode}")
+    Order selectOrderByMsg(@Param("userId") String userId
+            , @Param("commodityCode") String commodityCode);
 }
 
 

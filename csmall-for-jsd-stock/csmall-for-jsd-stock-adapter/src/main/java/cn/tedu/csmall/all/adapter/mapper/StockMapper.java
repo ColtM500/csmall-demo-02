@@ -16,5 +16,10 @@ public interface StockMapper {
 
 
     @Select("select count(id) from stock_tbl where commodity_code=#{code}")
-    int selectStockCountByCommodityCode(@Param("code")String code);
+    int selectStockCountByCommodityCode(@Param("code") String code);
+
+    @Update("update stock_tbl set count=count+#{reduceCount} where " +
+            " commodity_code=#{commodityCode}")
+    Integer incrStockCount(@Param("commodityCode") String commodityCode,
+                           @Param("count") Integer count);
 }
